@@ -1,10 +1,12 @@
 .DS_Store
 .vscode
+.idea
 node_modules
 .env*
 tmp
 ttt
 dist
+build
 mysql
 coverage
 backup
