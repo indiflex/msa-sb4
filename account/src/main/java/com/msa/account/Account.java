@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -25,9 +26,9 @@ public class Account {
     private BigDecimal balance;
 
     @Column(nullable = false)
-    private String password; // 암호화 필수
+    private String passwd; // 암호화 필수
 
     // MSA
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int unsigned")
     private Long userid;
 }
