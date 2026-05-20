@@ -1,0 +1,15 @@
+@baseUrl=http://localhost:8081/api/users
+
+### regist user
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "name": "admin",
+  "password": "password123"
+}
+
+
+### user info
+GET {{baseUrl}}/1
