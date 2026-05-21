@@ -10,6 +10,22 @@ Content-Type: application/json
   "password": "password123"
 }
 
+### login
+POST {{baseUrl}}/login
+Content-Type: application/x-www-form-urlencoded
+
+username = 1@email.com &
+password = pwd1
+
+> {%
+    client.global.set("auth_token", response.body.accessToken);
+%}
+
 
 ### user info
 GET {{baseUrl}}/1
+Authorization: Bearer {{auth_token}}
+
+### hello~
+GET {{baseUrl}}/hello
+Authorization: Bearer {{auth_token}}

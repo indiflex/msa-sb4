@@ -15,6 +15,7 @@ public class UserService {
 
     public UserDTO getUser(Long id) {
         User user = repository.findById(id).orElseThrow();
+        user.setPasswd("");
         return mapper.toDTO(user);
     }
 }

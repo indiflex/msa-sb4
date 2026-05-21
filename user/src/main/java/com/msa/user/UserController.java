@@ -21,7 +21,14 @@ public class UserController {
         UserDTO dto = (UserDTO) auth.getPrincipal();
         if (dto == null || !dto.getId().equals(id))
             throw new JwtException("Not valid user!!");
-        
+
         return service.getUser(id);
+    }
+
+    @GetMapping("hello")
+    String hello(Authentication auth) {
+        UserDTO dto = (UserDTO) auth.getPrincipal();
+        if (dto != null) return "Hello " + dto.getName();
+        return "Hello guest";
     }
 }

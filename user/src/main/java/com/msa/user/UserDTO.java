@@ -1,5 +1,6 @@
 package com.msa.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
+@JsonIgnoreProperties({"authorities", "accountNonExpired", "claims", "accountNonLocked", "credentialsNonExpired", "enabled", "password"})
 public class UserDTO extends User {
     private Long id;
     private String email;
