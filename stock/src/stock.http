@@ -20,3 +20,6 @@ Content-Type: application/json
   "cnt": 2,
   "price": 1000.0
 }
+
+### stock info
+GET {{baseUrl}}/1

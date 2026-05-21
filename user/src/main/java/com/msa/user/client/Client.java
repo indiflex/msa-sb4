@@ -21,4 +21,12 @@ public class Client {
             return null;
         }
     }
+
+    public StockDTO getStockInfo(Long userid) {
+        try {
+            return stockClient.get().uri("/api/stocks/{userid}", userid).retrieve().body(StockDTO.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

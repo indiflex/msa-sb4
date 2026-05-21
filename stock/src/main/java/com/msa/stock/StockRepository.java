@@ -12,4 +12,6 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select s from Stock s where s.userid = :userid")
     Optional<Stock> findByUseridForUpdate(@Param("userid") Long userid);
+
+    Optional<Stock> findByUserid(Long userid);
 }

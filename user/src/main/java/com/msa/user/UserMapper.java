@@ -13,5 +13,6 @@ public interface UserMapper {
     User toEntity(UserDTO dto);
 
     @Mapping(target = "roles", ignore = true)
+    @Mapping(target = "point", defaultValue = "0")
     User toEntity(UserRegistDTO dto);
 }

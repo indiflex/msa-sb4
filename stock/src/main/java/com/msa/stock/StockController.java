@@ -21,4 +21,11 @@ public class StockController {
         var stock = service.purchase(dto);
         return ResponseEntity.ok(stock);
     }
+
+    @GetMapping("{userid}")
+    ResponseEntity<StockDTO> getStock(@PathVariable Long userid) {
+        var stock = service.getStock(userid);
+        return ResponseEntity.ok(stock);
+    }
+
 }

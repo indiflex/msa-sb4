@@ -20,6 +20,7 @@ public class UserService {
         UserDTO dto = mapper.toDTO(user);
         dto.setPasswd("");
         dto.setAccount(client.getAccountInfo(id));
+        dto.setStock(client.getStockInfo(id));
 
         return dto;
     }
