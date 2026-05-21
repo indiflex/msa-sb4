@@ -1,19 +1,44 @@
 package com.msa.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserDTO {
+@Getter
+@Setter
+@ToString
+public class UserDTO extends User {
+    private Long id;
     private String email;
     private String passwd;
     private String name;
     private List<String> roleNames;
+
+    public UserDTO(Long id, String email, String passwd, String name, List<String> roleNames) {
+        super(name, passwd, roleNames.stream().map(SimpleGrantedAuthority::new).toList());
+        this.id = id;
+        this.email = email;
+        this.passwd = passwd;
+        this.name = name;
+        this.roleNames = roleNames;
+    }
+
+    // to make JWT token (client에게 내려 줄 값)
+    public Map<String, Object> getClaims() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("email", email);
+        map.put("name", name);
+        map.put("passwd", passwd);
+        map.put("roleNames", roleNames);
+
+        return map;
+    }
+
 }

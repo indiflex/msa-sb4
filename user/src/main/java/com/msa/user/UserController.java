@@ -1,6 +1,7 @@
 package com.msa.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,11 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    UserDTO getUser(@PathVariable Long id) {
+    UserDTO getUser(@PathVariable Long id, Authentication auth) {
+        UserDTO dto = (UserDTO) auth.getPrincipal();
+        if (dto == null || !dto.getId().equals(id))
+            throw new JwtException("Not valid user!!");
+        
         return service.getUser(id);
     }
 }

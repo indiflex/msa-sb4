@@ -38,7 +38,7 @@ public class User {
 
     @ElementCollection(fetch = FetchType.LAZY)
     @JoinTable(name = "UserRole",
-            joinColumns = @JoinColumn(name = "email")
+            joinColumns = @JoinColumn(name = "id")
     )
     @Column(name = "role")
     @Builder.Default
