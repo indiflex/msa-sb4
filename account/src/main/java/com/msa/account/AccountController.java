@@ -29,4 +29,10 @@ public class AccountController {
         var account = service.withdrawal(dto);
         return ResponseEntity.ok(account);
     }
+
+    @GetMapping("{userid}")
+    ResponseEntity<AccountDTO> getAccount(@PathVariable("userid") Long userid) {
+        var account = service.getAccountInfo(userid);
+        return ResponseEntity.ok(account);
+    }
 }

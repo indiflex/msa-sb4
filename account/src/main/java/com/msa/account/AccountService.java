@@ -53,4 +53,9 @@ public class AccountService {
         return repository.findByUseridForUpdate(userid).orElseThrow(() -> new IllegalArgumentException("NotFoundAccount"));
     }
 
+    public AccountDTO getAccountInfo(Long userid) {
+        Account account = repository.findByUserid(userid).orElseThrow(() -> new IllegalArgumentException("NotFoundAccount"));
+
+        return mapper.toDTO(account);
+    }
 }

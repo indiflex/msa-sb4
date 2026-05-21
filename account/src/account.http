@@ -32,3 +32,6 @@ Content-Type: application/json
   "amount": 1000,
   "passwd": "123456"
 }
+
+### account info
+GET {{baseUrl}}/1

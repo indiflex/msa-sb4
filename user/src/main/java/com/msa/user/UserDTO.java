@@ -1,6 +1,7 @@
 package com.msa.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.msa.user.client.AccountDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +22,8 @@ public class UserDTO extends User {
     private String passwd;
     private String name;
     private List<String> roleNames;
+
+    private AccountDTO account;
 
     public UserDTO(Long id, String email, String passwd, String name, List<String> roleNames) {
         super(name, passwd, roleNames.stream().map(SimpleGrantedAuthority::new).toList());
