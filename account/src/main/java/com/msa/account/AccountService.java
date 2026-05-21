@@ -28,10 +28,29 @@ public class AccountService {
     }
 
     @Transactional
-    public Object deposit(Long userid, BigDecimal amount) {
-        Account account = repository.findByUseridForUpdate(userid).orElseThrow(() -> new IllegalArgumentException("NotFoundAccount"));
-
+    public AccountDTO deposit(Long userid, BigDecimal amount) {
+        Account account = getAccount(userid);
         account.setBalance(account.getBalance().add(amount));
-        repository.save(account);
+        return mapper.toDTO(repository.save(account));
     }
+
+    @Transactional
+    public AccountDTO withdrawal(AccountWithdrawalDTO dto) {
+        Account account = getAccount(dto.getUserid());
+
+        if (!passwordEncoder.matches(dto.getPasswd(), account.getPasswd()))
+            throw new IllegalArgumentException("Not matched password!");
+
+        var newBalance = account.getBalance().subtract(dto.getAmount());
+        if (newBalance.compareTo(BigDecimal.ZERO) <= 0)
+            throw new IllegalArgumentException("Not enough balance!");
+
+        account.setBalance(newBalance);
+        return mapper.toDTO(repository.save(account));
+    }
+
+    private Account getAccount(Long userid) {
+        return repository.findByUseridForUpdate(userid).orElseThrow(() -> new IllegalArgumentException("NotFoundAccount"));
+    }
+
 }
