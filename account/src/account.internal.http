@@ -22,3 +22,16 @@ Content-Type: application/json
 
 ### account info
 GET {{baseUrl}}/1
+
+### deposit
+PUT {{baseUrl}}/1?amount=2000
+
+### withdrawal
+PATCH {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "userid": 1,
+  "amount": 1000,
+  "passwd": "123456"
+}

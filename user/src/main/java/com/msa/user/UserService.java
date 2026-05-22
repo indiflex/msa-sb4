@@ -1,6 +1,7 @@
 package com.msa.user;
 
 import com.msa.user.client.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,12 @@ public class UserService {
         dto.setStock(client.getStockInfo(id));
 
         return dto;
+    }
+
+    @Transactional
+    public UserDTO addPoint(AddPointDTO dto) {
+        User user = repository.findByIdForUpdate(dto.getUserid());
+        user.addPoint(dto.getCnt() * 100);
+        return mapper.toDTO(repository.save(user));
     }
 }

@@ -36,6 +36,10 @@ public class User {
     @ColumnDefault("0")
     private Integer point;
 
+    public void addPoint(Integer point) {
+        this.point += point;
+    }
+
     @ElementCollection(fetch = FetchType.LAZY)
     @JoinTable(name = "UserRole",
             joinColumns = @JoinColumn(name = "id")

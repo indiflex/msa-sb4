@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/internal/accounts")
 @RequiredArgsConstructor
@@ -13,6 +15,18 @@ public class AccountInternalController {
     @PostMapping
     ResponseEntity<AccountDTO> createAccount(@RequestBody AccountCreateDTO dto) {
         var account = service.createAccount(dto);
+        return ResponseEntity.ok(account);
+    }
+
+    @PutMapping("{userid}")
+    ResponseEntity<AccountDTO> deposit(@PathVariable("userid") Long userid, @RequestParam("amount") BigDecimal amount) {
+        var account = service.deposit(userid, amount);
+        return ResponseEntity.ok(account);
+    }
+
+    @PatchMapping("{userid}")
+    ResponseEntity<AccountDTO> withdrawal(@RequestBody AccountWithdrawalDTO dto) {
+        var account = service.withdrawal(dto);
         return ResponseEntity.ok(account);
     }
 

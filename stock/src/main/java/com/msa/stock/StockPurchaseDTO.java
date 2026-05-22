@@ -16,4 +16,6 @@ public class StockPurchaseDTO {
 
     @NotNull
     private Long userid;
+
+    private String accountPasswd;
 }

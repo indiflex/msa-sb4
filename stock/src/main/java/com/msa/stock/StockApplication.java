@@ -2,8 +2,10 @@ package com.msa.stock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients  // ← 추가(Feign 활성화)
 public class StockApplication {
 
     public static void main(String[] args) {
