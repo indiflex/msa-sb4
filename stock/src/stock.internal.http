@@ -1,0 +1,15 @@
+@baseUrl=http://localhost:8083/internal/stocks
+
+### create stock
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "userid": 1,
+  "cnt": 1,
+  "price": 1000
+}
+
+
+### stock info
+GET {{baseUrl}}/1

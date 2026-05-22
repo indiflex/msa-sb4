@@ -19,6 +19,8 @@ public class StockService {
 
     @Transactional
     public StockDTO purchase(StockPurchaseDTO dto) {
+        // 계좌 출금!
+        
         Stock stock = repository.findByUseridForUpdate(dto.getUserid()).orElseThrow(() -> new IllegalArgumentException("NotFoundStock"));
 
         stock.setCnt(stock.getCnt() + dto.getCnt());

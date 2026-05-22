@@ -12,12 +12,6 @@ import java.math.BigDecimal;
 public class AccountController {
     private final AccountService service;
 
-    @PostMapping
-    ResponseEntity<AccountDTO> createAccount(@RequestBody AccountCreateDTO dto) {
-        var account = service.createAccount(dto);
-        return ResponseEntity.ok(account);
-    }
-
     @PutMapping("{userid}")
     ResponseEntity<AccountDTO> deposit(@PathVariable("userid") Long userid, @RequestParam("amount") BigDecimal amount) {
         var account = service.deposit(userid, amount);
@@ -27,12 +21,6 @@ public class AccountController {
     @PatchMapping("{userid}")
     ResponseEntity<AccountDTO> withdrawal(@RequestBody AccountWithdrawalDTO dto) {
         var account = service.withdrawal(dto);
-        return ResponseEntity.ok(account);
-    }
-
-    @GetMapping("{userid}")
-    ResponseEntity<AccountDTO> getAccount(@PathVariable("userid") Long userid) {
-        var account = service.getAccountInfo(userid);
         return ResponseEntity.ok(account);
     }
 }

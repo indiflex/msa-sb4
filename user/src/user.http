@@ -5,9 +5,10 @@ POST {{baseUrl}}
 Content-Type: application/json
 
 {
-  "email": "admin@gmail.com",
-  "name": "admin",
-  "passwd": "password123"
+  "email": "newer2@gmail.com",
+  "name": "newer2",
+  "passwd": "password123",
+  "accountPasswd": 123456
 }
 
 ### login

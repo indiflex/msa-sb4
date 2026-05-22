@@ -1,16 +1,5 @@
 @baseUrl=http://localhost:8083/api/stocks
 
-### create stock
-POST {{baseUrl}}
-Content-Type: application/json
-
-{
-  "userid": 1,
-  "cnt": 1,
-  "price": 1000
-}
-
-
 ### purchase
 PATCH {{baseUrl}}/1
 Content-Type: application/json
@@ -20,6 +9,3 @@ Content-Type: application/json
   "cnt": 2,
   "price": 1000.0
 }
-
-### stock info
-GET {{baseUrl}}/1

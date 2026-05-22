@@ -58,4 +58,10 @@ public class AccountService {
 
         return mapper.toDTO(account);
     }
+
+    @Transactional
+    public void deleteAccount(Long userid) {
+        Account account = repository.findByUseridForUpdate(userid).orElseThrow(() -> new IllegalArgumentException("NotFoundAccount"));
+        repository.deleteById(account.getId());
+    }
 }

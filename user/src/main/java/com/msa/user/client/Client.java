@@ -16,7 +16,7 @@ public class Client {
 
     public AccountDTO getAccountInfo(Long userid) {
         try {
-            return accountClient.get().uri("/api/accounts/{userid}", userid).retrieve().body(AccountDTO.class);
+            return accountClient.get().uri("/internal/accounts/{userid}", userid).retrieve().body(AccountDTO.class);
         } catch (Exception e) {
             return null;
         }
@@ -24,8 +24,9 @@ public class Client {
 
     public StockDTO getStockInfo(Long userid) {
         try {
-            return stockClient.get().uri("/api/stocks/{userid}", userid).retrieve().body(StockDTO.class);
+            return stockClient.get().uri("/internal/stocks/{userid}", userid).retrieve().body(StockDTO.class);
         } catch (Exception e) {
+            e.printStackTrace(System.out);
             return null;
         }
     }

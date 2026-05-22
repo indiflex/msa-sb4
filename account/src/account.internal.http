@@ -1,0 +1,24 @@
+@baseUrl=http://localhost:8082/internal/accounts
+
+### create account
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "userid": 1,
+  "passwd": "123456"
+}
+
+### create account
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "userid": 2,
+  "passwd": "123456"
+}
+
+### account info
+GET {{baseUrl}}/1

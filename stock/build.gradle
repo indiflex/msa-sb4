@@ -8,6 +8,10 @@ group = 'com.msa'
 version = '0.0.1-SNAPSHOT'
 description = 'stock'
 
+ext {
+    set('springCloudVersion', "2025.1.1") // Spring Boot 4.x 호환 버전
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -16,6 +20,12 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
@@ -36,6 +46,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     implementation 'org.mapstruct:mapstruct:1.6.3'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 }
 
 tasks.named('test') {
