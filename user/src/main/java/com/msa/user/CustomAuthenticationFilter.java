@@ -29,6 +29,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
             "/api/users/login",
 //            "/api/users/hello",
             "/api/users",
+            "/api/users/async",
             "/internal/**",
             "/favicon.ico",
             "/actuator/**",

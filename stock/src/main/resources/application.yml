@@ -31,6 +31,22 @@ spring:
         format_sql: true
         use_sql_comments: true
 
+  cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: stock-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.msa.event"
+        spring.json.use.type.headers: true
+
 client:
   user: http://localhost:8081
   account: http://localhost:8082

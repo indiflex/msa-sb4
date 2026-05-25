@@ -1,7 +1,10 @@
 package com.msa.account;
 
+import com.msa.event.UserEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,16 @@ public class AccountService {
     private final AccountRepository repository;
     private final AccountMapper mapper;
     private final PasswordEncoder passwordEncoder;
+
+    private final KafkaTemplate<String, UserEvent> kafkaTemplate;
+
+    @KafkaListener(topics = "user-regist", groupId = "account-service")
+    public void createAccountByUserRegist(UserEvent event) {
+        if (event == null) return;
+        AccountCreateDTO dto = new AccountCreateDTO(event.getUsername(), event.getAccountPasswd(), event.getUserid());
+
+        this.createAccount(dto);
+    }
 
     public AccountDTO createAccount(AccountCreateDTO dto) {
         Account toCreateAccount = Account.builder()

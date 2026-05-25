@@ -1,8 +1,10 @@
 package com.msa.user;
 
+import com.msa.event.UserEvent;
 import com.msa.user.client.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,23 @@ public class UserService {
     private final AccountClient accountClient; // Feign
     private final StockClient stockClient;  // Feign
 
+    private final KafkaTemplate<String, UserEvent> kafkaTemplate;
+
+    @Transactional
+    public UserDTO registAsync(UserRegistDTO dto) {
+        User user = mapper.toEntity(dto);
+        user.setPasswd(passwordEncoder.encode(dto.getPasswd()));
+        user.addRole(UserRole.ROLE_USER);
+        User newer = repository.save(user);
+
+        UserEvent event = new UserEvent("REGIST", newer.getId(), newer.getName(), dto.getAccountPasswd());
+        kafkaTemplate.send("user-regist", event);
+
+        return mapper.toDTO(newer);
+    }
+
     //    @Transactional
+    // Saga pattern
     public UserDTO regist(UserRegistDTO dto) {
 //        boolean didRegistUser = false;
         Long userid = null;

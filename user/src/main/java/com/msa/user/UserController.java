@@ -16,6 +16,11 @@ public class UserController {
         return service.regist(dto);
     }
 
+    @PostMapping("async")
+    UserDTO registAsync(@RequestBody @Validated UserRegistDTO dto) {
+        return service.registAsync(dto);
+    }
+
     @GetMapping("{id}")
     UserDTO getUser(@PathVariable Long id, Authentication auth) {
         UserDTO dto = (UserDTO) auth.getPrincipal();
