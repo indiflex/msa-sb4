@@ -1,10 +1,12 @@
 .DS_Store
 .vscode
 .idea
+.gradle
 node_modules
 .env*
 tmp
 ttt
+qqq
 dist
 build
 mysql
