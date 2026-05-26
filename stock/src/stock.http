@@ -5,7 +5,7 @@ PATCH {{baseUrl}}/1
 Content-Type: application/json
 
 {
-  "userid": 2,
+  "userid": 7,
   "cnt": 2,
   "price": 1000.0,
   "accountPasswd": "123456"

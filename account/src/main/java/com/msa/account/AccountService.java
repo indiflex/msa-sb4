@@ -49,6 +49,7 @@ public class AccountService {
 
     @Transactional
     public AccountDTO withdrawal(AccountWithdrawalDTO dto) {
+        System.out.println("dto = " + dto);
         Account account = getAccount(dto.getUserid());
 
         if (!passwordEncoder.matches(dto.getPasswd(), account.getPasswd()))

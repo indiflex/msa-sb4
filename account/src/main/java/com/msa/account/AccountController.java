@@ -12,14 +12,15 @@ import java.math.BigDecimal;
 public class AccountController {
     private final AccountService service;
 
-    @PutMapping("{userid}")
-    ResponseEntity<AccountDTO> deposit(@PathVariable("userid") Long userid, @RequestParam("amount") BigDecimal amount) {
+    @PutMapping("")
+    ResponseEntity<AccountDTO> deposit(@RequestHeader("X-User-Id") Long userid, @RequestParam("amount") BigDecimal amount) {
         var account = service.deposit(userid, amount);
         return ResponseEntity.ok(account);
     }
 
-    @PatchMapping("{userid}")
-    ResponseEntity<AccountDTO> withdrawal(@RequestBody AccountWithdrawalDTO dto) {
+    @PatchMapping("")
+    ResponseEntity<AccountDTO> withdrawal(@RequestHeader("X-User-Id") Long userid, @RequestBody AccountWithdrawalDTO dto) {
+        dto.setUserid(userid);
         var account = service.withdrawal(dto);
         return ResponseEntity.ok(account);
     }

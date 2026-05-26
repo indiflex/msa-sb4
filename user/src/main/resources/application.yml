@@ -41,6 +41,13 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: user-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.msa.event"
+        spring.json.use.type.headers: true
 
 jwt:
   secret: JeTB8C1PYXBB4/A9/jas5gVmvZBxyw/7O8Ca4eizk2Q=

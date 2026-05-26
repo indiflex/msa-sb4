@@ -41,3 +41,29 @@ Authorization: Bearer {{auth_token}}
 ### LoginUser Stock info
 GET {{baseUrl}}/stocks/stock-info
 Authorization: Bearer {{auth_token}}
+
+### deposit
+PUT {{baseUrl}}/accounts?amount=2000
+Authorization: Bearer {{auth_token}}
+
+
+### withdrawal (body에 userid 제거!)
+PATCH {{baseUrl}}/accounts
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "amount": 1000,
+  "passwd": "123456"
+}
+
+### purchase stock
+POST {{baseUrl}}/stocks/purchase
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "cnt": 2,
+  "price": 1000.0,
+  "accountPasswd": "123456"
+}

@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 public class StockController {
     private final StockService service;
 
-    @PatchMapping("{userid}")
-    ResponseEntity<StockDTO> purchase(@RequestBody StockPurchaseDTO dto) {
+    @PostMapping("purchase")
+    ResponseEntity<StockDTO> purchase(@RequestHeader("X-User-Id") Long userid, @RequestBody StockPurchaseDTO dto) {
+        dto.setUserid(userid);
         var stock = service.purchase(dto);
         return ResponseEntity.ok(stock);
     }

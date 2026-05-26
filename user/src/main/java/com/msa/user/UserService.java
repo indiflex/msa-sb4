@@ -1,9 +1,11 @@
 package com.msa.user;
 
+import com.msa.event.StockEvent;
 import com.msa.event.UserEvent;
 import com.msa.user.client.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,14 @@ public class UserService {
     private final StockClient stockClient;  // Feign
 
     private final KafkaTemplate<String, UserEvent> kafkaTemplate;
+
+    @KafkaListener(topics = "stock-purchase", groupId = "user-service")
+    @Transactional
+    public UserDTO addPointByEvent(StockEvent event) {
+        User user = repository.findByIdForUpdate(event.getUserid());
+        user.addPoint(event.getCnt() * 100);
+        return mapper.toDTO(repository.save(user));
+    }
 
     @Transactional
     public UserDTO registAsync(UserRegistDTO dto) {
