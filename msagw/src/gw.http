@@ -33,3 +33,7 @@ Authorization: Bearer {{auth_token}}
 ### hello~
 GET {{baseUrl}}/users/hello
 Authorization: Bearer {{auth_token}}
+
+### LoginUser Account
+GET {{baseUrl}}/accounts/account-info
+Authorization: Bearer {{auth_token}}
