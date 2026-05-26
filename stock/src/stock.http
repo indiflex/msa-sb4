@@ -11,9 +11,6 @@ Content-Type: application/json
   "accountPasswd": "123456"
 }
 
-
-
-
 ### withdrawal
 PATCH http://localhost:8082/internal/accounts/1
 Content-Type: application/json
