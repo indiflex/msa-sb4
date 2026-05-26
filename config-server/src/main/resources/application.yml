@@ -5,6 +5,12 @@ server:
 spring:
   application:
     name: config-server
+
+  security:
+    user:
+      name: config-admin
+      password: ${CONFIG_SERVER_PASSWORD}
+
   cloud:
     config:
       server:
