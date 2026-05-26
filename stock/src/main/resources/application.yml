@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: stock
+    name: stock-service
 
   datasource:
     url: jdbc:mysql://localhost:3306/stockdb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
@@ -50,6 +50,9 @@ spring:
         spring.json.trusted.packages: "com.msa.event"
         spring.json.use.type.headers: true
 
-client:
-  user: http://localhost:8081
-  account: http://localhost:8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

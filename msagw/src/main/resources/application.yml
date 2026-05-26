@@ -3,33 +3,40 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       server:
         webflux:
           routes:
             - id: user-service
-              uri: http://localhost:8081
+              uri: lb://user-service
               predicates:
                 - Path=/api/users/login, /api/users/async
             - id: user-service-secret
-              uri: http://localhost:8081
+              uri: lb://user-service
               predicates:
                 - Path=/api/users/**
               filters:
                 - name: JwtAuth
             - id: account-service
-              uri: http://localhost:8082
+              uri: lb://account-service
               predicates:
                 - Path=/api/accounts/**
               filters:
                 - name: JwtAuth
             - id: stock-service
-              uri: http://localhost:8083
+              uri: lb://stock-service
               predicates:
                 - Path=/api/stocks/**
               filters:
                 - name: JwtAuth
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 jwt:
   secret: JeTB8C1PYXBB4/A9/jas5gVmvZBxyw/7O8Ca4eizk2Q=

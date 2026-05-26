@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "user-service", url = "${client.user}")
+@FeignClient(name = "user-service")
 public interface UserClient {
     @PatchMapping("/internal/users/addpoint")
     void addPoint(@RequestBody AddPointDTO dto);

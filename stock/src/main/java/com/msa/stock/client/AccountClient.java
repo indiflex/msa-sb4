@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@FeignClient(name = "account-service", url = "${client.account}")
+@FeignClient(name = "account-service")
 public interface AccountClient {
     @PutMapping("/internal/accounts/{userid}")
     void deposit(@PathVariable Long userid, @RequestParam BigDecimal amount);

@@ -8,6 +8,7 @@ group = 'com.msa'
 version = '0.0.1-SNAPSHOT'
 description = 'account'
 
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -16,6 +17,16 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2025.1.1") // Spring Boot 4.x 호환 버전
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
@@ -42,6 +53,8 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-kafka'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 }
 
 tasks.named('test') {
