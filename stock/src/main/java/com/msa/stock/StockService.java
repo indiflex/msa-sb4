@@ -38,6 +38,12 @@ public class StockService {
     }
 
     @Transactional
+    public StockDTO purchaseAsync(StockPurchaseDTO dto) {
+        return null;
+    }
+
+
+    @Transactional
     public StockDTO purchase(StockPurchaseDTO dto) {
         // 계좌 출금!
         boolean didWithdrawal = false;

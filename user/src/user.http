@@ -11,6 +11,17 @@ Content-Type: application/json
   "accountPasswd": 123456
 }
 
+### regist user
+POST {{baseUrl}}/async
+Content-Type: application/json
+
+{
+  "email": "newer101@gmail.com",
+  "name": "newer101",
+  "passwd": "password123",
+  "accountPasswd": 123456
+}
+
 ### login
 POST {{baseUrl}}/login
 Content-Type: application/x-www-form-urlencoded
@@ -30,3 +41,10 @@ Authorization: Bearer {{auth_token}}
 ### hello~
 GET {{baseUrl}}/hello
 Authorization: Bearer {{auth_token}}
+
+
+### kafka topics
+GET http://localhost:8081/kafka/topics
+
+### delete kafka topics
+DELETE http://localhost:8081/kafka/topics?topics=user-regist

@@ -30,6 +30,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 //            "/api/users/hello",
             "/api/users",
             "/api/users/async",
+            "/kafka/topics",
             "/internal/**",
             "/favicon.ico",
             "/actuator/**",

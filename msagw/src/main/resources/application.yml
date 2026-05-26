@@ -1,0 +1,35 @@
+# $schema: https://json.schemastore.org/spring-boot-application.json
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/users/login, /api/users/async
+            - id: user-service-secret
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/users/**
+              filters:
+                - name: JwtAuth
+            - id: account-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/accounts/**
+              filters:
+                - name: JwtAuth
+            - id: stock-service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/stocks/**
+              filters:
+                - name: JwtAuth
+
+jwt:
+  secret: JeTB8C1PYXBB4/A9/jas5gVmvZBxyw/7O8Ca4eizk2Q=

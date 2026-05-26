@@ -1,0 +1,35 @@
+@baseUrl=http://localhost:8080/api
+
+# User Account (404)
+GET {{baseUrl}}/accounts/1
+
+### regist async
+POST {{baseUrl}}/users/async
+Content-Type: application/json
+
+{
+  "email": "newer102@gmail.com",
+  "name": "newer102",
+  "passwd": "password123",
+  "accountPasswd": "123456"
+}
+
+### login
+POST {{baseUrl}}/users/login
+Content-Type: application/x-www-form-urlencoded
+
+username = 1@email.com &
+password = pwd1
+
+> {%
+    client.global.set("auth_token", response.body.accessToken);
+%}
+
+
+### user info
+GET {{baseUrl}}/users/1
+Authorization: Bearer {{auth_token}}
+
+### hello~
+GET {{baseUrl}}/users/hello
+Authorization: Bearer {{auth_token}}
